@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee Entry Form - Full Preview</title>
+
+  <!-- Bootstrap CSS CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeo3hxX6P6Vy0MA1/7Valcc/i+4tvH13GZ71z93tXT+2hRZx"
+    crossorigin="anonymous"
+  />
+
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <style>
+    body {
+      background: #f9fafb;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      padding: 30px 15px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .form-container {
+      background: white;
+      max-width: 900px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 40px 50px;
+      margin-bottom: 100px;
+    }
+
+    h1 {
+      font-weight: 700;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      color: #111827;
+      text-align: center;
+    }
+
+    form label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      display: block;
+      color: #374151;
+    }
+
+    input,
+    select {
+      border: 1.8px solid #d1d5db;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      width: 90%;
+      transition: border-color 0.3s ease;
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .form-row > div {
+      flex: 1 1 400px;
+      min-width: 280px;
+    }
+
+    button.submit-btn {
+      background: #4f46e5;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 0;
+      width: 100%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+    }
+    button.submit-btn:hover {
+      background: #4338ca;
+    }
+
+    small.help-text {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 767px) {
+      .form-row {
+        flex-direction: column;
+      }
+      .form-row > div {
+        flex: 1 1 100%;
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="form-container" role="main" aria-labelledby="formHeading">
+    <h1 id="formHeading"> Welcome to J-Squared IT Services</h1>
+    <h2 id="formHeading">New Employee Entry</h2>
+    <h3 id="formHeading">Please fill out the form so we can analyze your attrition: </h3>
+    <form method="post" novalidate>
+       {% csrf_token %}
+
+      <!-- Row 1 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="Age"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">calendar_today</span> Age</label>
+          <input type="number" id="Age" name="Age" min="18" max="100" placeholder="Enter Age" required />
+        </div>
+        <div class="form-group">
+          <label for="BusinessTravel"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">flight_takeoff</span> Business Travel</label>
+          <select id="BusinessTravel" name="BusinessTravel" required>
+            <option value="Travel_Rarely" selected>Travel Rarely</option>
+            <option value="Travel_Frequently">Travel Frequently</option>
+            <option value="Non-Travel">Non-Travel</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="DailyRate"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">attach_money</span> Daily Rate</label>
+          <input type="number" id="DailyRate" name="DailyRate" placeholder="Daily Wage" required />
+          <small class="help-text">Daily wage</small>
+        </div>
+        <div class="form-group">
+          <label for="Department"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">apartment</span> Department</label>
+          <select id="Department" name="Department" required>
+            <option value="Sales" selected>Sales</option>
+            <option value="Research & Development">Research & Development</option>
+            <option value="Human Resources">Human Resources</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="DistanceFromHome"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">directions_car</span> Distance From Home (miles)</label>
+          <input type="number" id="DistanceFromHome" name="DistanceFromHome" min="0" max="1000" value="10" required />
+        </div>
+        <div class="form-group">
+          <label for="Education"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">school</span> Education</label>
+          <select id="Education" name="Education" required>
+            <option value="1">Below College</option>
+            <option value="2">College</option>
+            <option value="3" selected>Bachelor</option>
+            <option value="4">Master</option>
+            <option value="5">Doctor</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="EducationField"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">menu_book</span> Education Field</label>
+          <select id="EducationField" name="EducationField" required>
+            <option value="Life Sciences" selected>Life Sciences</option>
+            <option value="Medical">Medical</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Technical Degree">Technical Degree</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="EnvironmentSatisfaction"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">sentiment_satisfied_alt</span> Environment Satisfaction</label>
+          <select id="EnvironmentSatisfaction" name="EnvironmentSatisfaction" required>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - High</option>
+            <option value="4" selected>4 - Very High</option>
+          </select>
+          <small class="help-text">1: Low, 2: Medium, 3: High, 4: Very High</small>
+        </div>
+      </div>
+
+      <!-- Row 5 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="Gender"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">wc</span> Gender</label>
+          <select id="Gender" name="Gender" required>
+            <option value="Male" selected>Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="HourlyRate"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">access_time</span> Hourly Rate</label>
+          <input type="number" id="HourlyRate" name="HourlyRate" min="0" value="93" placeholder="Hourly wage" required />
+          <small class="help-text">Hourly wage (for hourly roles)...</small>
+        </div>
+      </div>
+
+      <!-- Row 6 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="JobInvolvement"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">handyman</span> Job Involvement</label>
+          <select id="JobInvolvement" name="JobInvolvement" required>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - High</option>
+            <option value="4" selected>4 - Very High</option>
+          </select>
+          <small class="help-text">1: Low, 2: Medium, 3: High, 4: Very High</small>
+        </div>
+
+        <div class="form-group">
+          <label for="JobLevel"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">engineering</span> Job Level</label>
+          <select id="JobLevel" name="JobLevel" required>
+            <option value="1">1 - Entry Level</option>
+            <option value="2">2 - Mid-Level</option>
+            <option value="3">3 - Senior Level</option>
+            <option value="4">4 - Lead</option>
+            <option value="5" selected>5 - Executive</option>
+          </select>
+          <small class="help-text">1: Entry Level, 2: Mid-Level, 3: Senior Level, 4: Lead, 5: Executive</small>
+        </div>
+      </div>
+
+      <!-- Row 7 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="JobRole"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">work_outline</span> Job Role</label>
+          <select id="JobRole" name="JobRole" required>
+            <option value="Manufacturing Director">Manufacturing Director</option>
+            <option value="Research Scientist">Research Scientist</option>
+            <option value="Research Director">Research Director</option>
+            <option value="Laboratory Technician">Laboratory Technician</option>
+            <option value="Sales Executive" selected>Sales Executive</option>
+            <option value="Healthcare Representative">Healthcare Representative</option>
+            <option value="Manager">Manager</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Sales Representative">Sales Representative</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="JobSatisfaction"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">sentiment_satisfied</span> Job Satisfaction</label>
+          <select id="JobSatisfaction" name="JobSatisfaction" required>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - High</option>
+            <option value="4" selected>4 - Very High</option>
+          </select>
+          <small class="help-text">1: Low, 2: Medium, 3: High, 4: Very High</small>
+        </div>
+      </div>
+
+      <!-- Row 8 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="MaritalStatus"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">favorite</span> Marital Status</label>
+          <select id="MaritalStatus" name="MaritalStatus" required>
+            <option value="Single" selected>Single</option>
+            <option value="Married">Married</option>
+            <option value="Divorced">Divorced</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="MonthlyIncome"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">payments</span> Monthly Income</label>
+          <input type="number" id="MonthlyIncome" name="MonthlyIncome" min="0" placeholder="Enter your monthly salary" required />
+        </div>
+      </div>
+
+      <!-- Row 9 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="MonthlyRate"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">bar_chart</span> Monthly Rate</label>
+          <input type="number" id="MonthlyRate" name="MonthlyRate" min="0" placeholder="Performance Based Salary" required />
+        </div>
+
+        <div class="form-group">
+          <label for="NumCompaniesWorked"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">business</span> Number of Companies Worked</label>
+          <input type="number" id="NumCompaniesWorked" name="NumCompaniesWorked" min="0" placeholder="Number of companies you worked at" required />
+        </div>
+      </div>
+
+      <!-- Row 10 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="OverTime"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">schedule</span> OverTime</label>
+          <select id="OverTime" name="OverTime" required>
+            <option value="No" selected>No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="PercentSalaryHike"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">percent</span> Percent Salary Hike</label>
+          <input type="number" id="PercentSalaryHike" name="PercentSalaryHike" min="0" max="100" placeholder="Percentage salary hike" required />
+          <small class="help-text">How many % salary hike did you get</small>
+        </div>
+      </div>
+
+      <!-- Row 11 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="PerformanceRating"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">star_rate</span> Performance Rating</label>
+          <select id="PerformanceRating" name="PerformanceRating" required>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Good</option>
+            <option value="3">3 - Excellent</option>
+            <option value="4">4 - Outstanding</option>
+          </select>
+          <small class="help-text">1: Low, 2: Good, 3: Excellent, 4: Outstanding</small>
+        </div>
+
+        <div class="form-group">
+          <label for="RelationshipSatisfaction"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">favorite_border</span> Relationship Satisfaction</label>
+          <select id="RelationshipSatisfaction" name="RelationshipSatisfaction" required>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - High</option>
+            <option value="4" selected>4 - Very High</option>
+          </select>
+          <small class="help-text">1: Low, 2: Medium, 3: High, 4: Very High</small>
+        </div>
+      </div>
+
+      <!-- Row 12 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="StockOptionLevel"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">card_giftcard</span> Stock Option Level</label>
+          <select id="StockOptionLevel" name="StockOptionLevel" required>
+            <option value="0" selected>0 - None</option>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - High</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="TotalWorkingYears"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">access_time_filled</span> Total Working Years</label>
+          <input type="number" id="TotalWorkingYears" name="TotalWorkingYears" min="0" placeholder="Total years worked" required />
+        </div>
+      </div>
+
+      <!-- Row 13 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="TrainingTimesLastYear"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">fitness_center</span> Training Times Last Year</label>
+          <select id="TrainingTimesLastYear" name="TrainingTimesLastYear" required>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="WorkLifeBalance"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">balance</span> Work Life Balance</label>
+          <select id="WorkLifeBalance" name="WorkLifeBalance" required>
+            <option value="0">0</option>
+            <option value="1">1 - Bad</option>
+            <option value="2">2 - Good</option>
+            <option value="3" selected>3 - Better</option>
+            <option value="4">4 - Best</option>
+          </select>
+          <small class="help-text">1: Bad, 2: Good, 3: Better, 4: Best</small>
+        </div>
+      </div>
+
+      <!-- Row 14 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="YearsAtCompany"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">business_center</span> Years At Company</label>
+          <input type="number" id="YearsAtCompany" name="YearsAtCompany" min="0" placeholder="Years at company" required />
+        </div>
+
+        <div class="form-group">
+          <label for="YearsInCurrentRole"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">work_outline</span> Years in Current Role</label>
+          <input type="number" id="YearsInCurrentRole" name="YearsInCurrentRole" min="0" placeholder="Years in current role" required />
+        </div>
+      </div>
+
+      <!-- Row 15 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="YearsSinceLastPromotion"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">update</span> Years Since Last Promotion</label>
+          <input type="number" id="YearsSinceLastPromotion" name="YearsSinceLastPromotion" min="0" placeholder="Years since last promotion" required />
+        </div>
+
+        <div class="form-group">
+          <label for="YearsWithCurrManager"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">supervisor_account</span> Years With Current Manager</label>
+          <input type="number" id="YearsWithCurrManager" name="YearsWithCurrManager" min="0" placeholder="Years with current manager" required />
+        </div>
+      </div>
+{% comment %} 
+      <!-- Attrition (Output) -->
+      <div class="form-group">
+        <label for="Attrition"><span class="material-icons" aria-hidden="true" style="vertical-align:bottom;">flag</span> Attrition (Prediction Output)</label>
+        <input type="text" id="Attrition" name="Attrition" placeholder="(output) Attrition" readonly />
+      </div> {% endcomment %}
+
+      <button class="submit-btn" type="submit" aria-label="Submit employee information">
+        Submit
+        <span class="material-icons" aria-hidden="true" style="vertical-align:middle; margin-left: 8px;">
+          send
+        </span>
+      </button>
+    </form>
+  </main>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
